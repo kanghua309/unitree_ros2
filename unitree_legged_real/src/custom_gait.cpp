@@ -134,20 +134,20 @@ class CustomGait : public rclcpp::Node
       RCLCPP_INFO_STREAM(get_logger(), "Waiting...");
     }
   private:
-    void state_cb(const ros2_unitree_legged_msgs::msg::LowState & msg)
+    void state_cb(const ros2_unitree_legged_msgs::msg::LowState::SharedPtr msg)
     {
       if (feets.size()==0){
         // first iteration
         // This is a really dumb way of doing it but only way I could get to build ;-;
-        feets.push_back(msg.foot_force[0]); // FR
-        feets.push_back(msg.foot_force[1]); // FL
-        feets.push_back(msg.foot_force[2]); // RR
-        feets.push_back(msg.foot_force[3]); // RL
+        feets.push_back(msg->foot_force[0]); // FR
+        feets.push_back(msg->foot_force[1]); // FL
+        feets.push_back(msg->foot_force[2]); // RR
+        feets.push_back(msg->foot_force[3]); // RL
       }else {
-        feets[0] = msg.foot_force[0];
-        feets[1] = msg.foot_force[1];
-        feets[2] = msg.foot_force[2];
-        feets[3] = msg.foot_force[3];
+        feets[0] = msg->foot_force[0];
+        feets[1] = msg->foot_force[1];
+        feets[2] = msg->foot_force[2];
+        feets[3] = msg->foot_force[3];
       }
       // RCLCPP_INFO_STREAM(get_logger(), "Foot Force:  FR:" << feets[0] << "  FL:" << feets[1] << 
                                       //  "  RR:" << feets[2] << "  RL:" << feets[3]);
